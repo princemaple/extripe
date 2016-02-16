@@ -22,9 +22,7 @@ defmodule Stripex.Mixfile do
   end
 
   defp description do
-    '''
-    Stripe API wrapper
-    '''
+    "Stripe API wrapper"
   end
 
   defp package do
