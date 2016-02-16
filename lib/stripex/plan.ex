@@ -1,5 +1,5 @@
 defmodule Stripex.Plan do
-  @resource "plans"
-
   use Stripex.Actions.CRUD
+
+  @resource "plans"
 end
