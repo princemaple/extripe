@@ -1,6 +1,6 @@
 # Stripex
 
-**TODO: Add description**
+Stripe API wrapper in Elixir
 
 ## Installation
 
@@ -12,9 +12,9 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [{:stripex, "~> 0.0.1"}]
         end
 
-  2. Ensure stripex is started before your application:
+  2. Ensure `httpoison` is started before your application:
 
         def application do
-          [applications: [:stripex]]
+          [applications: [:httpoison]]
         end
 
