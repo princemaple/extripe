@@ -9,7 +9,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   1. Add extripe to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:extripe, "~> 0.0.1"}]
+          [{:extripe, "~> 0.1.0"}]
         end
 
   2. Ensure `httpoison` is started before your application:
