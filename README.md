@@ -1,4 +1,4 @@
-# Stripex
+# Extripe
 
 Stripe API wrapper in Elixir
 
@@ -6,10 +6,10 @@ Stripe API wrapper in Elixir
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
-  1. Add stripex to your list of dependencies in `mix.exs`:
+  1. Add extripe to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:stripex, "~> 0.0.1"}]
+          [{:extripe, "~> 0.0.1"}]
         end
 
   2. Ensure `httpoison` is started before your application:

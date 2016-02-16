@@ -1,4 +1,4 @@
-defmodule Stripex.Actions.CRUD do
+defmodule Extripe.Actions.CRUD do
   @actions [:index, :show, :create, :update, :delete]
 
   defmacro __using__(opts) do
@@ -20,19 +20,19 @@ defmodule Stripex.Actions.CRUD do
   end
 
   defp compile([:index|rest], acc) do
-    compile(rest, [quote(do: use Stripex.Actions.Index) | acc])
+    compile(rest, [quote(do: use Extripe.Actions.Index) | acc])
   end
   defp compile([:show|rest], acc) do
-    compile(rest, [quote(do: use Stripex.Actions.Show) | acc])
+    compile(rest, [quote(do: use Extripe.Actions.Show) | acc])
   end
   defp compile([:create|rest], acc) do
-    compile(rest, [quote(do: use Stripex.Actions.Create) | acc])
+    compile(rest, [quote(do: use Extripe.Actions.Create) | acc])
   end
   defp compile([:update|rest], acc) do
-    compile(rest, [quote(do: use Stripex.Actions.Update) | acc])
+    compile(rest, [quote(do: use Extripe.Actions.Update) | acc])
   end
   defp compile([:delete|rest], acc) do
-    compile(rest, [quote(do: use Stripex.Actions.Delete) | acc])
+    compile(rest, [quote(do: use Extripe.Actions.Delete) | acc])
   end
 
   defp compile([], acc) do

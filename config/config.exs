@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :stripex, key: :value
+#     config :extripe, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:stripex, :key)
+#     Application.get_env(:extripe, :key)
 #
 # Or configure a 3rd-party app:
 #

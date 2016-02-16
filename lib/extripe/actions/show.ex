@@ -1,5 +1,5 @@
-defmodule Stripex.Actions.Show do
-  alias Stripex.API
+defmodule Extripe.Actions.Show do
+  alias Extripe.API
 
   defmacro __using__(_) do
     quote do

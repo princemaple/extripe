@@ -1,6 +1,6 @@
-defmodule StripexTest do
+defmodule ExtripeTest do
   use ExUnit.Case
-  doctest Stripex
+  doctest Extripe
 
   test "the truth" do
     assert 1 + 1 == 2

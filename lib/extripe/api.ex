@@ -1,4 +1,4 @@
-defmodule Stripex.API do
+defmodule Extripe.API do
   use HTTPoison.Base
 
   defp process_url(url) do
@@ -10,7 +10,7 @@ defmodule Stripex.API do
 
   defp process_request_body(body) when is_binary(body), do: body
   defp process_request_body(body) do
-    import Stripex.Utils, only: [normalize_params: 1]
+    import Extripe.Utils, only: [normalize_params: 1]
 
     body
     |> normalize_params

@@ -1,8 +1,8 @@
-defmodule Stripex.Mixfile do
+defmodule Extripe.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :stripex,
+    [app: :extripe,
      version: "0.1.0",
      elixir: "~> 1.2",
      description: description,
@@ -29,6 +29,6 @@ defmodule Stripex.Mixfile do
     [files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
      maintainers: ["Po Chen"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/princemaple/stripex"}]
+     links: %{"GitHub" => "https://github.com/princemaple/extripe"}]
   end
 end

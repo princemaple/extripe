@@ -1,4 +1,4 @@
-defmodule Stripex.Utils do
+defmodule Extripe.Utils do
   @spec normalize_params(Map.t) :: binary
   def normalize_params(map) do
     map
