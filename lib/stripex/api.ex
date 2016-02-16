@@ -21,16 +21,7 @@ defmodule Stripex.API do
     [{"content-type", "application/x-www-form-urlencoded"} | headers]
   end
 
-  def decode!(module, json) do
-    json
-    |> Poison.decode!
-    |> fetch_data
-  end
-
-  defp fetch_data(map) do
-    case Map.fetch(map, "data") do
-      {:ok, data} -> data
-      :error -> map
-    end
+  defp process_response_body(body) do
+    Poison.decode! body
   end
 end
