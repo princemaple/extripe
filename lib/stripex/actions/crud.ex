@@ -5,7 +5,14 @@ defmodule Stripex.Actions.CRUD do
     actions = Keyword.get(opts, :only, @actions)
     actions = actions -- Keyword.get(opts, :except, [])
 
-    compile(actions)
+    quote do
+      Module.put_attribute __MODULE__, :crud_actions, unquote(actions)
+      @before_compile unquote(__MODULE__)
+    end
+  end
+
+  defmacro __before_compile__(env) do
+    compile(Module.get_attribute(env.module, :crud_actions))
   end
 
   defp compile(actions) do
