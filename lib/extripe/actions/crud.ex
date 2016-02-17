@@ -1,5 +1,10 @@
 defmodule Extripe.Actions.CRUD do
+  import String, only: [capitalize: 1, to_atom: 1]
+
   @actions [:index, :show, :create, :update, :delete]
+  @action_implementations Enum.map(@actions, fn action ->
+    {action, to_atom "Elixir.Extripe.Actions.#{action |> to_string |> capitalize}"}
+  end)
 
   defmacro __using__(opts) do
     actions = Keyword.get(opts, :only, @actions)
@@ -15,24 +20,18 @@ defmodule Extripe.Actions.CRUD do
     compile(Module.get_attribute(env.module, :crud_actions))
   end
 
+  defp which_implementation(action), do: @action_implementations[action]
+
   defp compile(actions) do
     compile(actions, [])
   end
 
-  defp compile([:index|rest], acc) do
-    compile(rest, [quote(do: use Extripe.Actions.Index) | acc])
-  end
-  defp compile([:show|rest], acc) do
-    compile(rest, [quote(do: use Extripe.Actions.Show) | acc])
-  end
-  defp compile([:create|rest], acc) do
-    compile(rest, [quote(do: use Extripe.Actions.Create) | acc])
-  end
-  defp compile([:update|rest], acc) do
-    compile(rest, [quote(do: use Extripe.Actions.Update) | acc])
-  end
-  defp compile([:delete|rest], acc) do
-    compile(rest, [quote(do: use Extripe.Actions.Delete) | acc])
+  for action <- @actions do
+    defp compile([unquote(action) = action | rest], acc) do
+      compile(rest, [quote do
+        use unquote(which_implementation(action))
+      end | acc])
+    end
   end
 
   defp compile([], acc) do
