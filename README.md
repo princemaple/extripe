@@ -32,6 +32,7 @@ stripe_secret_key=sk_test_abcdefg12345678 iex -S mix
 
 ### Features
 
+#### Simple CRUD
 ```elixir
 iex(1)> Extripe.Plan.list
 {:ok,
