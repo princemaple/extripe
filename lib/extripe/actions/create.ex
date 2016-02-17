@@ -4,7 +4,7 @@ defmodule Extripe.Actions.Create do
 
   defmacro __using__(opts) do
     {scope, opts} = Keyword.pop(opts, :scope)
-    {resource, opts} = Keyword.pop(opts, :resource)
+    {resource, _opts} = Keyword.pop(opts, :resource)
 
     code = cond do
       is_tuple(scope) or is_nil(scope) ->
