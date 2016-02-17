@@ -36,13 +36,13 @@ stripe_secret_key=sk_test_abcdefg12345678 iex -S mix
 
 ##### Aliases
 
-original | alias
-----------------
-index    | list
-show     | fetch
-create   | -
-update   | -
-delete   | destroy
+|original | alias  |
+|---------|--------|
+|index    | list   |
+|show     | fetch  |
+|create   | -      |
+|update   | -      |
+|delete   | destroy|
 
 
 ```elixir
