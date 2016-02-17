@@ -12,6 +12,7 @@ defmodule Extripe.Actions.CRUD do
     opts = Keyword.drop(opts, [:only, :except])
 
     quote do
+      require Extripe.Utils.Endpoint
       Module.put_attribute __MODULE__, :crud_actions, unquote(actions)
       Module.put_attribute __MODULE__, :endpoint_opts, unquote(opts)
       @before_compile unquote(__MODULE__)
