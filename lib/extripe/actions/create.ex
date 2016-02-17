@@ -9,16 +9,14 @@ defmodule Extripe.Actions.Create do
     code = cond do
       is_tuple(scope) or is_nil(scope) ->
         quote do
-          def create(params), do: API.post(create_url, params)
-          defp create_url do
-            Endpoint.build(unquote(scope), nil, unquote(resource))
+          def create(params) do
+            API.post(Endpoint.build(unquote(scope), nil, unquote(resource)), params)
           end
         end
       is_binary(scope) ->
         quote do
-          def create(scope_id, params), do: API.post(create_url(scope_id), params)
-          defp create_url(scope_id) do
-            Endpoint.build(unquote(scope), scope_id, unquote(resource))
+          def create(scope_id, params) do
+            API.post(Endpoint.build(unquote(scope), scope_id, unquote(resource)), params)
           end
         end
     end
