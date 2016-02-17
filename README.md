@@ -234,6 +234,19 @@ iex(9)> Extripe.Subscription.delete "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
    {"Request-Id", "req_7vRd9CAHJt8NE2"}, {"Stripe-Version", "2016-02-03"},
    {"Strict-Transport-Security", "max-age=31556926; includeSubDomains"}],
   status_code: 200}}
+
+iex(10)> Extripe.Subscription.show "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
+{:ok,
+ %HTTPoison.Response{body: %{"error" => %{"message" => "Customer cus_7vNk0duWVulcPe does not have a subscription with ID sub_7vRdUiQQhv3M7u\n\n",
+      "param" => "subscription", "type" => "invalid_request_error"}},
+  headers: [{"Server", "nginx"}, {"Date", "Wed, 17 Feb 2016 19:24:47 GMT"},
+   {"Content-Type", "application/json"}, {"Content-Length", "192"},
+   {"Connection", "keep-alive"}, {"Access-Control-Allow-Credentials", "true"},
+   {"Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, DELETE"},
+   {"Access-Control-Allow-Origin", "*"}, {"Access-Control-Max-Age", "300"},
+   {"Cache-Control", "no-cache, no-store"},
+   {"Request-Id", "req_7vRopcRWuj0YHt"}, {"Stripe-Version", "2016-02-03"}],
+  status_code: 404}}
 ```
 
 ## Disclaimer
