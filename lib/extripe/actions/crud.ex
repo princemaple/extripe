@@ -9,32 +9,37 @@ defmodule Extripe.Actions.CRUD do
   defmacro __using__(opts) do
     actions = Keyword.get(opts, :only, @actions)
     actions = actions -- Keyword.get(opts, :except, [])
+    opts = Keyword.drop(opts, [:only, :except])
 
     quote do
       Module.put_attribute __MODULE__, :crud_actions, unquote(actions)
+      Module.put_attribute __MODULE__, :endpoint_opts, unquote(opts)
       @before_compile unquote(__MODULE__)
     end
   end
 
   defmacro __before_compile__(env) do
-    compile(Module.get_attribute(env.module, :crud_actions))
+    compile(
+      Module.get_attribute(env.module, :crud_actions),
+      Module.get_attribute(env.module, :endpoint_opts)
+    )
   end
 
   defp which_implementation(action), do: @action_implementations[action]
 
-  defp compile(actions) do
-    compile(actions, [])
+  defp compile(actions, opts) do
+    compile(actions, opts, [])
   end
 
   for action <- @actions do
-    defp compile([unquote(action) = action | rest], acc) do
-      compile(rest, [quote do
-        use unquote(which_implementation(action))
+    defp compile([unquote(action) = action | rest], opts, acc) do
+      compile(rest, opts, [quote do
+        use unquote(which_implementation(action)), unquote(opts)
       end | acc])
     end
   end
 
-  defp compile([], acc) do
+  defp compile([], _, acc) do
     acc
   end
 end
