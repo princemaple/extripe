@@ -1,5 +1,3 @@
 defmodule Extripe.Plan do
-  use Extripe.Actions.CRUD
-
-  @resource "plans"
+  use Extripe.Actions.CRUD, resource: "plans"
 end
