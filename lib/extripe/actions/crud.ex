@@ -26,8 +26,6 @@ defmodule Extripe.Actions.CRUD do
     )
   end
 
-  defp which_implementation(action), do: @action_implementations[action]
-
   defp compile(actions, opts) do
     compile(actions, opts, [])
   end
@@ -35,7 +33,7 @@ defmodule Extripe.Actions.CRUD do
   for action <- @actions do
     defp compile([unquote(action) = action | rest], opts, acc) do
       compile(rest, opts, [quote do
-        use unquote(which_implementation(action)), unquote(opts)
+        use unquote(@action_implementations[action]), unquote(opts)
       end | acc])
     end
   end
