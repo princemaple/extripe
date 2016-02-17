@@ -10,10 +10,8 @@ defmodule Extripe.API do
 
   defp process_request_body(body) when is_binary(body), do: body
   defp process_request_body(body) do
-    import Extripe.Utils, only: [normalize_params: 1]
-
     body
-    |> normalize_params
+    |> Extripe.Utils.Params.normalize
     |> URI.encode_query
   end
 
