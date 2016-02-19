@@ -13,17 +13,8 @@ defmodule Extripe.Actions.CRUD do
 
     quote do
       require Extripe.Utils.Endpoint
-      Module.put_attribute __MODULE__, :crud_actions, unquote(actions)
-      Module.put_attribute __MODULE__, :endpoint_opts, unquote(opts)
-      @before_compile unquote(__MODULE__)
+      unquote(compile(actions, opts))
     end
-  end
-
-  defmacro __before_compile__(env) do
-    compile(
-      Module.get_attribute(env.module, :crud_actions),
-      Module.get_attribute(env.module, :endpoint_opts)
-    )
   end
 
   defp compile(actions, opts) do
