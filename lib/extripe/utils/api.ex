@@ -1,4 +1,4 @@
-defmodule Extripe.API do
+defmodule Extripe.Utils.API do
   use HTTPoison.Base
 
   defp process_url(url) do

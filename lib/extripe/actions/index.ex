@@ -1,6 +1,5 @@
 defmodule Extripe.Actions.Index do
-  alias Extripe.API
-  alias Extripe.Utils.Endpoint
+  alias Extripe.Utils.{API, Endpoint}
 
   defmacro __using__(opts) do
     {scope, opts} = Keyword.pop(opts, :scope)
