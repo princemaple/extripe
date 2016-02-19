@@ -253,3 +253,37 @@ iex(10)> Extripe.Subscription.show "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
 ## Disclaimer
 
 I've only started learning elixir a couple weeks ago.
+
+## Contributing
+
+```elixir
+# Adding a new resource
+defmodule Extripe.NewResource do
+  # normal resource
+  # note: new_resource is probably plural
+  use Extripe.Actions.CRUD, resource: "new_resource"
+  
+  # not fully CRUDable resource
+  use Extripe.Actions.CRUD, only: [:index, :show], resource: "new_resource"
+  # or
+  use Extripe.Actions.CRUD, except: [:delete], resource: "new_resource"
+  
+  # nested resource
+  # when the scoping resource is plural, e.g. /v1/customers/customer_id/subscriptions
+  use Extripe.Actions.CRUD, scope: "customers", resource: "subscriptions"
+  # when the scoping resource is singular, e.g. /v1/balance/history
+  use Extripe.Actions.CRUD, scope: {"balance", :singular}, resource: "history"
+  
+  # singluar resource
+  # currently only Balance is of this kind, /v1/balance
+  use Extripe.Actions.CRUD, only: [:show], resource: "balance", singular: true
+  
+  # special case implementations
+  def pay(id), do: # pay bill
+  
+  # special CRUD implementations
+  def list do
+    # special implementation of list
+  end
+end
+```
