@@ -306,6 +306,36 @@ iex(8)> Extripe.Plan.list limit: 1
    {"Request-Id", "req_7xGlC7mrqMILBS"}, {"Stripe-Version", "2016-02-03"},
    {"Strict-Transport-Security", "max-age=31556926; includeSubDomains"}],
   status_code: 200}}
+
+iex(9)> {:ok, events} = Extripe.Event.list created: [lt: 1455733031]
+{:ok,
+ %HTTPoison.Response{body: %{"data" => [%{"api_version" => "2016-02-03",
+       "created" => 1455732840,
+       "data" => %{"object" => %{"amount" => 1000, "created" => 1455593353,
+           "currency" => "usd", "id" => "regular", "interval" => "month",
+           "interval_count" => 1, "livemode" => false, "metadata" => %{},
+           "name" => "REGULAR", "object" => "plan",
+           "statement_descriptor" => nil, "trial_period_days" => 15},
+         "previous_attributes" => %{"name" => "Regular"}},
+       "id" => "evt_17fZoKEhB5xMvgQ7Fdl7krpl", "livemode" => false,
+       "object" => "event", "pending_webhooks" => 0,
+       "request" => "req_7vQfTWcjfnH7JW", "type" => "plan.updated"},
+     %{"api_version" => "2016-02-03", "created" => 1455732634,
+       "data" => %{"object" => %{"amount" => 1500, "created" => 1455730831,
+           "currency" => "gbp", "id" => "regular_gb", "interval" => "month",
+           "interval_count" => 1, "livemode" => false, "metadata" => %{},
+           "name" => "REGULAR GB", "object" => "plan",
+           "statement_descriptor" => nil, "trial_period_days" => nil}},
+       "id" => "evt_17fZl0EhB5xMvgQ7Ekqu42UQ", "livemode" => false,
+       "object" => "event", "pending_webhooks" => 0,
+       "request" => "req_7vQc2AYrZYzkv3", "type" => "plan.deleted"},
+     # a lot more ...
+  ]}}}
+
+iex(10)> {:ok, events} = Extripe.Event.list created: [gt: 1455733031]
+# similar to iex(9)
+# and you also have gte, lte
+# or you could just specify an integer unix timestamp for :created instead of a map or a keyword list
 ```
 
 ## Disclaimer
