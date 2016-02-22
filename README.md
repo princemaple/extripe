@@ -250,6 +250,64 @@ iex(10)> Extripe.Subscription.show "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
   status_code: 404}}
 ```
 
+#### Pagination
+
+```elixir
+iex(5)> Extripe.Plan.list starting_after: "regular_au"
+{:ok,
+ %HTTPoison.Response{body: %{"data" => [%{"amount" => 1000,
+       "created" => 1455593353, "currency" => "usd", "id" => "regular",
+       "interval" => "month", "interval_count" => 1, "livemode" => false,
+       "metadata" => %{}, "name" => "REGULAR", "object" => "plan",
+       "statement_descriptor" => nil, "trial_period_days" => 15}],
+    "has_more" => false, "object" => "list", "url" => "/v1/plans"},
+  headers: [{"Server", "nginx"}, {"Date", "Mon, 22 Feb 2016 16:06:47 GMT"},
+   {"Content-Type", "application/json"}, {"Content-Length", "410"},
+   {"Connection", "keep-alive"}, {"Access-Control-Allow-Credentials", "true"},
+   {"Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, DELETE"},
+   {"Access-Control-Allow-Origin", "*"}, {"Access-Control-Max-Age", "300"},
+   {"Cache-Control", "no-cache, no-store"},
+   {"Request-Id", "req_7xGkaAhxOSggNx"}, {"Stripe-Version", "2016-02-03"},
+   {"Strict-Transport-Security", "max-age=31556926; includeSubDomains"}],
+  status_code: 200}}
+
+iex(6)> Extripe.Plan.list ending_before: "regular_au"
+{:ok,
+ %HTTPoison.Response{body: %{"data" => [%{"amount" => 1500,
+       "created" => 1455733031, "currency" => "gbp", "id" => "regular_gb",
+       "interval" => "month", "interval_count" => 1, "livemode" => false,
+       "metadata" => %{}, "name" => "Regular GB", "object" => "plan",
+       "statement_descriptor" => nil, "trial_period_days" => nil}],
+    "has_more" => false, "object" => "list", "url" => "/v1/plans"},
+  headers: [{"Server", "nginx"}, {"Date", "Mon, 22 Feb 2016 16:07:11 GMT"},
+   {"Content-Type", "application/json"}, {"Content-Length", "418"},
+   {"Connection", "keep-alive"}, {"Access-Control-Allow-Credentials", "true"},
+   {"Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, DELETE"},
+   {"Access-Control-Allow-Origin", "*"}, {"Access-Control-Max-Age", "300"},
+   {"Cache-Control", "no-cache, no-store"},
+   {"Request-Id", "req_7xGkNX95Xm2ERB"}, {"Stripe-Version", "2016-02-03"},
+   {"Strict-Transport-Security", "max-age=31556926; includeSubDomains"}],
+  status_code: 200}}
+
+iex(8)> Extripe.Plan.list limit: 1
+{:ok,
+ %HTTPoison.Response{body: %{"data" => [%{"amount" => 1500,
+       "created" => 1455733031, "currency" => "gbp", "id" => "regular_gb",
+       "interval" => "month", "interval_count" => 1, "livemode" => false,
+       "metadata" => %{}, "name" => "Regular GB", "object" => "plan",
+       "statement_descriptor" => nil, "trial_period_days" => nil}],
+    "has_more" => true, "object" => "list", "url" => "/v1/plans"},
+  headers: [{"Server", "nginx"}, {"Date", "Mon, 22 Feb 2016 16:07:35 GMT"},
+   {"Content-Type", "application/json"}, {"Content-Length", "417"},
+   {"Connection", "keep-alive"}, {"Access-Control-Allow-Credentials", "true"},
+   {"Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, DELETE"},
+   {"Access-Control-Allow-Origin", "*"}, {"Access-Control-Max-Age", "300"},
+   {"Cache-Control", "no-cache, no-store"},
+   {"Request-Id", "req_7xGlC7mrqMILBS"}, {"Stripe-Version", "2016-02-03"},
+   {"Strict-Transport-Security", "max-age=31556926; includeSubDomains"}],
+  status_code: 200}}
+```
+
 ## Disclaimer
 
 I've only started learning elixir a couple weeks ago.
