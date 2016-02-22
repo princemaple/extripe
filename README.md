@@ -10,7 +10,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 ```elixir
 def deps do
-  [{:extripe, "~> 0.3.0"}]
+  [{:extripe, "~> 0.3.1"}]
 end
 ```
 

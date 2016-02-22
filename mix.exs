@@ -3,7 +3,7 @@ defmodule Extripe.Mixfile do
 
   def project do
     [app: :extripe,
-     version: "0.3.0",
+     version: "0.3.1",
      elixir: "~> 1.2",
      description: description,
      package: package,
