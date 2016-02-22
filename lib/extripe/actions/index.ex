@@ -7,18 +7,30 @@ defmodule Extripe.Actions.Index do
 
     code = cond do
       is_tuple(scope) or is_nil(scope) ->
+        path = quote do: Endpoint.build(unquote(scope), nil, unquote(resource))
+
         quote do
           def index do
-            API.get(Endpoint.build(unquote(scope), nil, unquote(resource)))
+            API.get(unquote(path))
+          end
+          def index(opts) do
+            API.get(unquote(path) <> "?#{URI.encode_query(opts)}")
           end
           defdelegate list, to: __MODULE__, as: :index
+          defdelegate list(opts), to: __MODULE__, as: :index
         end
       is_binary(scope) ->
+        path = quote do: Endpoint.build(unquote(scope), scope_id, unquote(resource))
+
         quote do
           def index(scope_id) do
-            API.get(Endpoint.build(unquote(scope), scope_id, unquote(resource)))
+            API.get(unquote(path))
+          end
+          def index(scope_id, opts) do
+            API.get(unquote(path) <> "?#{URI.encode_query(opts)}")
           end
           defdelegate list(scope_id), to: __MODULE__, as: :index
+          defdelegate list(scope_id, opts), to: __MODULE__, as: :index
         end
     end
 
