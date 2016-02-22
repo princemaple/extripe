@@ -1,5 +1,5 @@
 defmodule Extripe.Actions.Index do
-  alias Extripe.Utils.{API, Endpoint}
+  alias Extripe.Utils.{API, Endpoint, Params}
 
   defmacro __using__(opts) do
     {scope, opts} = Keyword.pop(opts, :scope)
@@ -14,7 +14,8 @@ defmodule Extripe.Actions.Index do
             API.get(unquote(path))
           end
           def index(opts) do
-            API.get(unquote(path) <> "?#{URI.encode_query(opts)}")
+            query_string = URI.encode_query(Params.normalize(opts))
+            API.get(unquote(path) <> "?" <> query_string)
           end
           defdelegate list, to: __MODULE__, as: :index
           defdelegate list(opts), to: __MODULE__, as: :index
@@ -27,7 +28,8 @@ defmodule Extripe.Actions.Index do
             API.get(unquote(path))
           end
           def index(scope_id, opts) do
-            API.get(unquote(path) <> "?#{URI.encode_query(opts)}")
+            query_string = URI.encode_query(Params.normalize(opts))
+            API.get(unquote(path) <> "?" <> query_string)
           end
           defdelegate list(scope_id), to: __MODULE__, as: :index
           defdelegate list(scope_id, opts), to: __MODULE__, as: :index
