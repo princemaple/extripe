@@ -2,11 +2,9 @@
 
 [![Hex.pm](https://img.shields.io/hexpm/v/extripe.svg)]()
 
-Stripe API wrapper in Elixir
+Stripe API wrapper in Elixir [Read Documentation](http://hexdocs.pm/extripe/)
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
   1. Add extripe to your list of dependencies in `mix.exs`:
 
