@@ -1,5 +1,7 @@
 # Extripe
 
+[![Hex.pm](https://img.shields.io/hexpm/v/plug.svg)]()
+
 Stripe API wrapper in Elixir
 
 ## Installation
