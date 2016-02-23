@@ -340,10 +340,6 @@ iex(10)> {:ok, events} = Extripe.Event.list created: [gt: 1455733031]
 # or you could just specify an integer unix timestamp for :created instead of a map or a keyword list
 ```
 
-## Disclaimer
-
-I've only started learning elixir a couple weeks ago.
-
 ## Contributing
 
 ```elixir
