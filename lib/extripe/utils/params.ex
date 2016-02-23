@@ -1,5 +1,4 @@
 defmodule Extripe.Utils.Params do
-  @spec normalize(Map.t) :: binary
   def normalize(map) do
     map
     |> Enum.filter(fn {_, v} -> !is_nil(v) end)
