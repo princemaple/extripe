@@ -9,9 +9,14 @@ defmodule Extripe.Actions.CRUD do
   defmacro __using__(opts) do
     actions = Keyword.get(opts, :only, @actions)
     actions = actions -- Keyword.get(opts, :except, [])
+    resource = Keyword.fetch!(opts, :resource)
     opts = Keyword.drop(opts, [:only, :except])
 
     quote do
+      @moduledoc ~s"""
+      See [Stripe API reference](https://stripe.com/docs/api##{unquote(resource)})
+      for more information about #{__MODULE__ |> Module.split |> List.last}
+      """
       require Extripe.Utils.Endpoint
       unquote(compile(actions, opts))
     end
