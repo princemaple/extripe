@@ -10,7 +10,7 @@ Stripe API wrapper in Elixir [Read Documentation](http://hexdocs.pm/extripe/)
 
 ```elixir
 def deps do
-  [{:extripe, "~> 0.3.1"}]
+  [{:extripe, "~> 0.3.2"}]
 end
 ```
 
