@@ -3,15 +3,15 @@ defmodule Extripe.Actions.Show do
 
   defmacro __using__(opts) do
     {scope, opts} = Keyword.pop(opts, :scope)
-    {resource, opts} = Keyword.pop(opts, :resource)
-    {singular, _opts} = Keyword.pop(opts, :singular)
+    {singular, opts} = Keyword.pop(opts, :singular)
+    resource = Keyword.fetch!(opts, :resource)
 
     has_scope_id = cond do
       is_binary(scope) -> true
       is_tuple(scope) or is_nil(scope) -> false
     end
 
-    code = cond do
+    cond do
       singular && !has_scope_id ->
         quote do
           def show do
@@ -38,10 +38,6 @@ defmodule Extripe.Actions.Show do
           end
           defdelegate fetch(scope_id, id), to: __MODULE__, as: :show
         end
-    end
-
-    quote do
-      unquote(code)
     end
   end
 end

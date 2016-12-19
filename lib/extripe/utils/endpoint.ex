@@ -1,4 +1,8 @@
 defmodule Extripe.Utils.Endpoint do
+  def code_style(nil), do: :no_scope_id
+  def code_style({_name, :singular}), do: :no_scope_id
+  def code_style(name) when is_binary(name), do: :with_scope_id
+
   defmacro build(scope, scope_id, resource) do
     case scope do
       nil ->
