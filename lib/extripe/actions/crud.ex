@@ -5,8 +5,9 @@ defmodule Extripe.Actions.CRUD do
   end)
 
   defmacro __using__(opts) do
-    actions = Keyword.pop(opts, :only, @actions)
-    actions = actions -- Keyword.pop(opts, :except, [])
+    {actions, opts} = Keyword.pop(opts, :only, @actions)
+    {exceptions, opts} = Keyword.pop(opts, :except, [])
+    actions = actions -- exceptions
     resource = Keyword.fetch!(opts, :resource)
 
     quote do
