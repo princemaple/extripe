@@ -5,7 +5,7 @@ defmodule Extripe.Actions.Create do
     {scope, opts} = Keyword.pop(opts, :scope)
     resource = Keyword.fetch!(opts, :resource)
 
-    code(scope, resource, Endpoint.code_style(scope))
+    code(scope, resource, Endpoint.scope_style(scope))
   end
 
   defp code(scope, resource, :no_scope_id) do
