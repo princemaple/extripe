@@ -27,7 +27,7 @@ defmodule Extripe.Mixfile do
   end
 
   defp package do
-    [files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+    [files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Po Chen"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/princemaple/extripe"}]
