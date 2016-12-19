@@ -1,6 +1,4 @@
 defmodule Extripe.Utils.Endpoint do
-  alias __MODULE__
-
   defmacro build(scope, scope_id, resource) do
     case scope do
       nil ->
@@ -20,7 +18,7 @@ defmodule Extripe.Utils.Endpoint do
 
   defmacro build(scope, scope_id, resource, id) do
     quote do
-      Endpoint.build(
+      unquote(__MODULE__).build(
         unquote(scope),
         unquote(scope_id),
         unquote(resource)
