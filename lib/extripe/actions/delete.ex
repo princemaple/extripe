@@ -13,7 +13,6 @@ defmodule Extripe.Actions.Delete do
       def delete(id) do
         API.delete(Endpoint.build(unquote(scope), nil, unquote(resource), id))
       end
-      defdelegate destroy(id), to: __MODULE__, as: :delete
     end
   end
 
@@ -22,7 +21,6 @@ defmodule Extripe.Actions.Delete do
       def delete(scope_id, id) do
         API.delete(Endpoint.build(unquote(scope), scope_id, unquote(resource), id))
       end
-      defdelegate destroy(scope_id, id), to: __MODULE__, as: :delete
     end
   end
 end

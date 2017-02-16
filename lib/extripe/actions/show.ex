@@ -29,14 +29,12 @@ defmodule Extripe.Actions.Show do
           def show(id) do
             API.get(Endpoint.build(unquote(scope), nil, unquote(resource), id))
           end
-          defdelegate fetch(id), to: __MODULE__, as: :show
         end
        has_scope_id ->
         quote do
           def show(scope_id, id) do
             API.get(Endpoint.build(unquote(scope), scope_id, unquote(resource), id))
           end
-          defdelegate fetch(scope_id, id), to: __MODULE__, as: :show
         end
     end
   end

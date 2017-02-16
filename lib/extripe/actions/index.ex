@@ -19,8 +19,6 @@ defmodule Extripe.Actions.Index do
         query_string = URI.encode_query(Params.normalize(opts))
         API.get(unquote(path) <> "?" <> query_string)
       end
-      defdelegate list, to: __MODULE__, as: :index
-      defdelegate list(opts), to: __MODULE__, as: :index
     end
   end
 
@@ -35,8 +33,6 @@ defmodule Extripe.Actions.Index do
         query_string = URI.encode_query(Params.normalize(opts))
         API.get(unquote(path) <> "?" <> query_string)
       end
-      defdelegate list(scope_id), to: __MODULE__, as: :index
-      defdelegate list(scope_id, opts), to: __MODULE__, as: :index
     end
   end
 end

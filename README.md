@@ -34,16 +34,6 @@ stripe_secret_key=sk_test_abcdefg12345678 iex -S mix
 
 #### Simple CRUD
 
-##### Aliases
-
-|original | alias  |
-|---------|--------|
-|index    | list   |
-|show     | fetch  |
-|create   | -      |
-|update   | -      |
-|delete   | destroy|
-
 Using `Plan`, `Customer` and `Subscirption` in the following examples, all entities should be supported, if you find anything that is not supported or new endpoints coming out from stripe, don't hesitate to [file an issue](https://github.com/princemaple/extripe/issues/new)
 
 ```elixir
