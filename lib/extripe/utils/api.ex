@@ -22,4 +22,11 @@ defmodule Extripe.Utils.API do
   defp process_response_body(body) do
     Poison.decode! body
   end
+
+  def get(url), do: super(url) |> ok_error
+  def post(url, body), do: super(url, body) |> ok_error
+  def delete(url), do: super(url) |> ok_error
+
+  defp ok_error({:ok, %{body: body}}), do: {:ok, body}
+  defp ok_error({:error, %{reason: reason}}), do: {:error, reason}
 end
