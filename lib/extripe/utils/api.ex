@@ -27,6 +27,7 @@ defmodule Extripe.Utils.API do
   def post(url, body), do: super(url, body) |> ok_error
   def delete(url), do: super(url) |> ok_error
 
+  defp ok_error({:ok, %{body: %{"error" => error}}}), do: {:error, error}
   defp ok_error({:ok, %{body: body}}), do: {:ok, body}
   defp ok_error({:error, %{reason: reason}}), do: {:error, reason}
 end
