@@ -1,6 +1,7 @@
 # Extripe
 
 [![Hex.pm](https://img.shields.io/hexpm/v/extripe.svg)](https://hex.pm/packages/extripe)
+[![Documentation](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/extripe/Extripe.html)
 
 Stripe API wrapper in Elixir [Read Documentation](http://hexdocs.pm/extripe/)
 
