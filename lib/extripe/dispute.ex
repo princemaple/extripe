@@ -1,5 +1,10 @@
 defmodule Extripe.Dispute do
   use Extripe.Actions.CRUD, resource: "disputes"
 
-  # TODO #close
+  alias Extripe.Utils.{API, Endpoint}
+
+  @spec close(binary) :: {:ok, map} | {:error, binary}
+  def close(id) do
+    API.post(Endpoint.build(nil, nil, "disputes", id) <> "/close", "")
+  end
 end
