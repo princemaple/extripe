@@ -38,7 +38,7 @@ stripe_secret_key=sk_test_abcdefg12345678 iex -S mix
 Using `Plan`, `Customer` and `Subscirption` in the following examples, all entities should be supported, if you find anything that is not supported or new endpoints coming out from stripe, don't hesitate to [file an issue](https://github.com/princemaple/extripe/issues/new)
 
 ```elixir
-iex(1)> Extripe.Plan.list
+iex(1)> Extripe.Plan.index
 {:ok,
  %{"data" => [%{"amount" => 1500, "created" => 1455733031, "currency" => "gbp",
       "id" => "regular_gb", "interval" => "month", "interval_count" => 1,
@@ -90,7 +90,7 @@ iex(5)> Extripe.Plan.delete "test"
 
 ```elixir
 # find a customer first
-iex(6)> Extripe.Customer.list
+iex(6)> Extripe.Customer.index
 {:ok,
  %{"data" => [%{"account_balance" => 0, "created" => 1455721994,
       "currency" => "usd", "default_source" => nil, "delinquent" => false,
@@ -107,7 +107,7 @@ iex(6)> Extripe.Customer.list
    "has_more" => false, "object" => "list", "url" => "/v1/customers"}}
 
 # find the subscriptions that belong to the customer
-iex(7)> Extripe.Subscription.list "cus_7vNk0duWVulcPe"
+iex(7)> Extripe.Subscription.index "cus_7vNk0duWVulcPe"
 {:ok,
  %{"data" => [], "has_more" => false,
     "object" => "list",
@@ -154,7 +154,7 @@ iex(10)> Extripe.Subscription.show "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
 #### Pagination
 
 ```elixir
-iex(5)> Extripe.Plan.list starting_after: "regular_au"
+iex(5)> Extripe.Plan.index starting_after: "regular_au"
 {:ok,
  %{"data" => [%{"amount" => 1000, "created" => 1455593353, "currency" => "usd",
       "id" => "regular", "interval" => "month", "interval_count" => 1,
@@ -163,7 +163,7 @@ iex(5)> Extripe.Plan.list starting_after: "regular_au"
       "trial_period_days" => 15}], "has_more" => false, "object" => "list",
    "url" => "/v1/plans"}}
 
-iex(6)> Extripe.Plan.list ending_before: "regular_au"
+iex(6)> Extripe.Plan.index ending_before: "regular_au"
 {:ok,
  %{"data" => [%{"amount" => 1500,
       "created" => 1455733031, "currency" => "gbp", "id" => "regular_gb",
@@ -172,7 +172,7 @@ iex(6)> Extripe.Plan.list ending_before: "regular_au"
       "statement_descriptor" => nil, "trial_period_days" => nil}],
    "has_more" => false, "object" => "list", "url" => "/v1/plans"}}
 
-iex(8)> Extripe.Plan.list limit: 1
+iex(8)> Extripe.Plan.index limit: 1
 {:ok,
  %{"data" => [%{"amount" => 1500,
       "created" => 1455733031, "currency" => "gbp", "id" => "regular_gb",
@@ -181,7 +181,7 @@ iex(8)> Extripe.Plan.list limit: 1
       "statement_descriptor" => nil, "trial_period_days" => nil}],
    "has_more" => true, "object" => "list", "url" => "/v1/plans"}}
 
-iex(9)> {:ok, events} = Extripe.Event.list created: [lt: 1455733031]
+iex(9)> {:ok, events} = Extripe.Event.index created: [lt: 1455733031]
 {:ok,
  %{"data" => [%{"api_version" => "2016-02-03", "created" => 1455732840,
       "data" => %{"object" => %{"amount" => 1000, "created" => 1455593353,
@@ -223,7 +223,7 @@ iex(9)> {:ok, events} = Extripe.Event.list created: [lt: 1455733031]
       "type" => "customer.subscription.deleted"},
     ...]}}
 
-iex(10)> {:ok, events} = Extripe.Event.list created: [gt: 1455733031]
+iex(10)> {:ok, events} = Extripe.Event.index created: [gt: 1455733031]
 # similar to iex(9)
 # and you also have gte, lte
 # or you could just specify an integer unix timestamp for :created instead of a map or a keyword list
