@@ -3,12 +3,13 @@ defmodule Extripe.Actions.Show do
 
   defmacro __using__(opts) do
     {scope, opts} = Keyword.pop(opts, :scope)
-    {singular, opts} = Keyword.pop(opts, :singular)
+    {singular, opts} = Keyword.pop(opts, :singular, false)
     resource = Keyword.fetch!(opts, :resource)
 
-    has_scope_id = cond do
-      is_binary(scope) -> true
-      is_tuple(scope) or is_nil(scope) -> false
+    has_scope_id = case scope do
+      <<_scope::binary>> -> true
+      {_scope, :singular} -> false
+      nil -> false
     end
 
     cond do

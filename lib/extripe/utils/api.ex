@@ -2,10 +2,16 @@ defmodule Extripe.Utils.API do
   use HTTPoison.Base
 
   defp process_url(url) do
-    "https://"
-    <> System.get_env("stripe_secret_key")
-    <> ":@api.stripe.com/v1"
-    <> url
+    [
+      "https://",
+      Application.get_env(
+        :extripe,
+        :stripe_secret_key,
+        System.get_env("stripe_secret_key")
+      ),
+     ":@api.stripe.com/v1",
+     url
+   ]
   end
 
   defp process_request_body(body) when is_binary(body), do: body
