@@ -15,24 +15,28 @@ defmodule Extripe.Actions.Show do
     cond do
       singular && !has_scope_id ->
         quote do
+          @spec show() :: {:ok, map} | {:error, binary}
           def show do
             API.get(Endpoint.build(unquote(scope), nil, unquote(resource)))
           end
         end
       singular && has_scope_id ->
         quote do
+          @spec show(binary) :: {:ok, map} | {:error, binary}
           def show(scope_id) do
             API.get(Endpoint.build(unquote(scope), scope_id, unquote(resource)))
           end
         end
       !has_scope_id ->
         quote do
+          @spec show(binary) :: {:ok, map} | {:error, binary}
           def show(id) do
             API.get(Endpoint.build(unquote(scope), nil, unquote(resource), id))
           end
         end
        has_scope_id ->
         quote do
+          @spec show(binary, binary) :: {:ok, map} | {:error, binary}
           def show(scope_id, id) do
             API.get(Endpoint.build(unquote(scope), scope_id, unquote(resource), id))
           end
