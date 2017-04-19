@@ -93,11 +93,15 @@ iex(5)> Extripe.Plan.delete "test"
 {:ok, %{"deleted" => true, "id" => "test"}}
 ```
 
+#### Response
+
+All actions return either `{:ok, body :: map}` or `{:error, reason :: binary}`
+
 #### Nested resources
 
 ```elixir
 # find a customer first
-iex(6)> Extripe.Customer.index
+iex(1)> Extripe.Customer.index
 {:ok,
  %{"data" => [%{"account_balance" => 0, "created" => 1455721994,
       "currency" => "usd", "default_source" => nil, "delinquent" => false,
@@ -114,14 +118,14 @@ iex(6)> Extripe.Customer.index
    "has_more" => false, "object" => "list", "url" => "/v1/customers"}}
 
 # find the subscriptions that belong to the customer
-iex(7)> Extripe.Subscription.index "cus_7vNk0duWVulcPe"
+iex(2)> Extripe.Subscription.index customer: "cus_7vNk0duWVulcPe"
 {:ok,
  %{"data" => [], "has_more" => false,
     "object" => "list",
     "url" => "/v1/customers/cus_7vNk0duWVulcPe/subscriptions"}}
 
 # manipulations...
-iex(8)> Extripe.Subscription.create "cus_7vNk0duWVulcPe", %{plan: "regular"}
+iex(3)> Extripe.Subscription.create customer: "cus_7vNk0duWVulcPe", %{plan: "regular"}
 {:ok,
  %{"application_fee_percent" => nil,
    "cancel_at_period_end" => false, "canceled_at" => nil,
@@ -136,7 +140,7 @@ iex(8)> Extripe.Subscription.create "cus_7vNk0duWVulcPe", %{plan: "regular"}
    "status" => "trialing", "tax_percent" => nil, "trial_end" => 1457032418,
    "trial_start" => 1455736418}}
 
-iex(9)> Extripe.Subscription.delete "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
+iex(4)> Extripe.Subscription.delete "sub_7vRdUiQQhv3M7u"
 {:ok,
  %{"application_fee_percent" => nil,
    "cancel_at_period_end" => false, "canceled_at" => 1455736452,
@@ -151,17 +155,12 @@ iex(9)> Extripe.Subscription.delete "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
      "trial_period_days" => 15}, "quantity" => 1, "start" => 1455736418,
    "status" => "canceled", "tax_percent" => nil, "trial_end" => 1457032418,
    "trial_start" => 1455736418}}
-
-iex(10)> Extripe.Subscription.show "cus_7vNk0duWVulcPe", "sub_7vRdUiQQhv3M7u"
-{:ok,
- %{"error" => %{"message" => "Customer cus_7vNk0duWVulcPe does not have a subscription with ID sub_7vRdUiQQhv3M7u\n\n",
-     "param" => "subscription", "type" => "invalid_request_error"}}}
 ```
 
 #### Pagination
 
 ```elixir
-iex(5)> Extripe.Plan.index starting_after: "regular_au"
+iex(1)> Extripe.Plan.index starting_after: "regular_au"
 {:ok,
  %{"data" => [%{"amount" => 1000, "created" => 1455593353, "currency" => "usd",
       "id" => "regular", "interval" => "month", "interval_count" => 1,
@@ -170,7 +169,7 @@ iex(5)> Extripe.Plan.index starting_after: "regular_au"
       "trial_period_days" => 15}], "has_more" => false, "object" => "list",
    "url" => "/v1/plans"}}
 
-iex(6)> Extripe.Plan.index ending_before: "regular_au"
+iex(2)> Extripe.Plan.index ending_before: "regular_au"
 {:ok,
  %{"data" => [%{"amount" => 1500,
       "created" => 1455733031, "currency" => "gbp", "id" => "regular_gb",
@@ -179,7 +178,7 @@ iex(6)> Extripe.Plan.index ending_before: "regular_au"
       "statement_descriptor" => nil, "trial_period_days" => nil}],
    "has_more" => false, "object" => "list", "url" => "/v1/plans"}}
 
-iex(8)> Extripe.Plan.index limit: 1
+iex(3)> Extripe.Plan.index limit: 1
 {:ok,
  %{"data" => [%{"amount" => 1500,
       "created" => 1455733031, "currency" => "gbp", "id" => "regular_gb",
@@ -188,7 +187,7 @@ iex(8)> Extripe.Plan.index limit: 1
       "statement_descriptor" => nil, "trial_period_days" => nil}],
    "has_more" => true, "object" => "list", "url" => "/v1/plans"}}
 
-iex(9)> {:ok, events} = Extripe.Event.index created: [lt: 1455733031]
+iex(4)> {:ok, events} = Extripe.Event.index created: [lt: 1455733031]
 {:ok,
  %{"data" => [%{"api_version" => "2016-02-03", "created" => 1455732840,
       "data" => %{"object" => %{"amount" => 1000, "created" => 1455593353,
@@ -230,8 +229,8 @@ iex(9)> {:ok, events} = Extripe.Event.index created: [lt: 1455733031]
       "type" => "customer.subscription.deleted"},
     ...]}}
 
-iex(10)> {:ok, events} = Extripe.Event.index created: [gt: 1455733031]
-# similar to iex(9)
+iex(5)> {:ok, events} = Extripe.Event.index created: [gt: 1455733031]
+# similar to the previous one
 # and you also have gte, lte
 # or you could just specify an integer unix timestamp for :created instead of a map or a keyword list
 ```
