@@ -3,7 +3,7 @@ defmodule Extripe.Charge do
 
   alias Extripe.Utils.{API, Endpoint}
 
-  @spec capture(id :: binary) :: {:ok, map} | {:error, binary}
+  @spec capture(binary) :: {:ok, map} | {:error, binary}
   def capture(id) do
     API.post(Endpoint.build(nil, nil, "charges", id) <> "/capture", "")
   end
