@@ -24,12 +24,19 @@ end
 ```
 
 ## Usage
-Use with an env var `stripe_secret_key`
 
-e.g.
-```
-stripe_secret_key=sk_test_abcdefg12345678 iex -S mix
-```
+- Use with env var `stripe_secret_key`
+
+  ```elixir
+  stripe_secret_key=sk_test_abcdefg12345678 iex -S mix
+  ```
+
+- Or config it
+
+  ```elixir
+  config :extripe,
+    stripe_secret_key: "sk_test_abcdefg12345678"
+  ```
 
 ### Features
 
