@@ -7,19 +7,11 @@ Stripe API wrapper in Elixir [Read Documentation](http://hexdocs.pm/extripe/)
 
 ## Installation
 
-  1. Add extripe to your list of dependencies in `mix.exs`:
+Add extripe to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [{:extripe, "~> 1.0"}]
-end
-```
-
-  2. Ensure `httpoison` is started before your application:
-
-```elixir
-def application do
-  [applications: [:httpoison]]
 end
 ```
 
