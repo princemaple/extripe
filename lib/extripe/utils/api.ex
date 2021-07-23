@@ -9,16 +9,17 @@ defmodule Extripe.Utils.API do
         :stripe_secret_key,
         System.get_env("stripe_secret_key")
       ),
-     ":@api.stripe.com/v1",
-     url
-   ]
+      ":@api.stripe.com/v1",
+      url
+    ]
   end
 
   defp process_request_body(body) when is_binary(body), do: body
+
   defp process_request_body(body) do
     body
-    |> Extripe.Utils.Params.normalize
-    |> URI.encode_query
+    |> Extripe.Utils.Params.normalize()
+    |> URI.encode_query()
   end
 
   defp process_request_headers(headers) do
@@ -26,7 +27,7 @@ defmodule Extripe.Utils.API do
   end
 
   defp process_response_body(body) do
-    Poison.decode! body
+    Jason.decode!(body)
   end
 
   def get(url), do: super(url) |> ok_error
