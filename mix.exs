@@ -4,7 +4,7 @@ defmodule Extripe.Mixfile do
   def project do
     [
       app: :extripe,
-      version: "1.2.2",
+      version: "1.3.0",
       elixir: "~> 1.9",
       description: description(),
       package: package(),
@@ -21,7 +21,7 @@ defmodule Extripe.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 1.0"},
-      {:json, "~> 1.0"},
+      {:jason, "~> 1.0"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
