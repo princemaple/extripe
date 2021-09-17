@@ -1,16 +1,20 @@
 defmodule Extripe.Mixfile do
   use Mix.Project
 
+  @source_url "https://github.com/princemaple/extripe"
+  @version "1.3.1"
+
   def project do
     [
       app: :extripe,
-      version: "1.3.0",
+      version: @version,
       elixir: "~> 1.9",
       description: description(),
       package: package(),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
@@ -26,6 +30,15 @@ defmodule Extripe.Mixfile do
     ]
   end
 
+  defp docs do
+    [
+      source_ref: "v#{@version}",
+      main: "Extripe",
+      canonical: "http://hexdocs.pm/extripe",
+      source_url: @source_url
+    ]
+  end
+
   defp description do
     "Stripe API wrapper"
   end
@@ -35,7 +48,7 @@ defmodule Extripe.Mixfile do
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Po Chen"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/princemaple/extripe"}
+      links: %{"GitHub" => @source_url}
     ]
   end
 end

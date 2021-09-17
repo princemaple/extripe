@@ -1,7 +1,7 @@
 defmodule Extripe.Utils.API do
   use HTTPoison.Base
 
-  defp process_url(url) do
+  def process_url(url) do
     [
       "https://",
       Application.get_env(
@@ -14,19 +14,19 @@ defmodule Extripe.Utils.API do
     ]
   end
 
-  defp process_request_body(body) when is_binary(body), do: body
+  def process_request_body(body) when is_binary(body), do: body
 
-  defp process_request_body(body) do
+  def process_request_body(body) do
     body
     |> Extripe.Utils.Params.normalize()
     |> URI.encode_query()
   end
 
-  defp process_request_headers(headers) do
+  def process_request_headers(headers) do
     [{"content-type", "application/x-www-form-urlencoded"} | headers]
   end
 
-  defp process_response_body(body) do
+  def process_response_body(body) do
     Jason.decode!(body)
   end
 
