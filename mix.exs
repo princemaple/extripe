@@ -26,7 +26,7 @@ defmodule Extripe.Mixfile do
     [
       {:httpoison, "~> 1.0"},
       {:jason, "~> 1.0"},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :docs}
     ]
   end
 
